@@ -14,4 +14,165 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="lariat-files\driver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lariat-files\lariat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="lariat-files\handout.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lariat-files\out-fancy8">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy9">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy10">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy11">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy12">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy13">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy14">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy15">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy16">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy17">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy18">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy19">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy20">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy21">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy22">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out0">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out1">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out3">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out4">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out5">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out6">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out7">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out8">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out9">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out10">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out11">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out12">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out13">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out14">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out15">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out16">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out17">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out18">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out19">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out20">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out21">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out22">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out24">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy0">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy1">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy3">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy4">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy5">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy6">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lariat-files\out-fancy7">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lariat-files\lariat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

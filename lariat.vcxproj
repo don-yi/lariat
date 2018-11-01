@@ -115,6 +115,63 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="lariat-files\lariat.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="lariat-files\driver.cpp" />
+    <ClCompile Include="lariat-files\lariat.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="lariat-files\handout.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lariat-files\out-fancy0" />
+    <None Include="lariat-files\out-fancy1" />
+    <None Include="lariat-files\out-fancy10" />
+    <None Include="lariat-files\out-fancy11" />
+    <None Include="lariat-files\out-fancy12" />
+    <None Include="lariat-files\out-fancy13" />
+    <None Include="lariat-files\out-fancy14" />
+    <None Include="lariat-files\out-fancy15" />
+    <None Include="lariat-files\out-fancy16" />
+    <None Include="lariat-files\out-fancy17" />
+    <None Include="lariat-files\out-fancy18" />
+    <None Include="lariat-files\out-fancy19" />
+    <None Include="lariat-files\out-fancy2" />
+    <None Include="lariat-files\out-fancy20" />
+    <None Include="lariat-files\out-fancy21" />
+    <None Include="lariat-files\out-fancy22" />
+    <None Include="lariat-files\out-fancy3" />
+    <None Include="lariat-files\out-fancy4" />
+    <None Include="lariat-files\out-fancy5" />
+    <None Include="lariat-files\out-fancy6" />
+    <None Include="lariat-files\out-fancy7" />
+    <None Include="lariat-files\out-fancy8" />
+    <None Include="lariat-files\out-fancy9" />
+    <None Include="lariat-files\out0" />
+    <None Include="lariat-files\out1" />
+    <None Include="lariat-files\out10" />
+    <None Include="lariat-files\out11" />
+    <None Include="lariat-files\out12" />
+    <None Include="lariat-files\out13" />
+    <None Include="lariat-files\out14" />
+    <None Include="lariat-files\out15" />
+    <None Include="lariat-files\out16" />
+    <None Include="lariat-files\out17" />
+    <None Include="lariat-files\out18" />
+    <None Include="lariat-files\out19" />
+    <None Include="lariat-files\out2" />
+    <None Include="lariat-files\out20" />
+    <None Include="lariat-files\out21" />
+    <None Include="lariat-files\out22" />
+    <None Include="lariat-files\out24" />
+    <None Include="lariat-files\out3" />
+    <None Include="lariat-files\out4" />
+    <None Include="lariat-files\out5" />
+    <None Include="lariat-files\out6" />
+    <None Include="lariat-files\out7" />
+    <None Include="lariat-files\out8" />
+    <None Include="lariat-files\out9" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
