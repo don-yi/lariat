@@ -35,25 +35,25 @@ void test1()
         std::cout << lar << std::endl;
     }
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-//// insert in the middle 1
-//void test2()
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    const int asize = 8;
-//    Lariat<int, asize> lar;
-//    lar.insert( 0, 1 );
-//    lar.insert( 1, 2 );
-//    lar.insert( 2, 3 );
-//    lar.insert( 3, 4 );
-//
-//    for( int i = 1; i < 14; ++i ) {
-//        lar.insert( i, 4+i );
-//        std::cout << lar << std::endl;
-//    }
-//}
-//
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// insert in the middle 1
+void test2()
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    const int asize = 8;
+    Lariat<int, asize> lar;
+    lar.insert( 0, 1 );
+    lar.insert( 1, 2 );
+    lar.insert( 2, 3 );
+    lar.insert( 3, 4 );
+
+    for( int i = 1; i < 14; ++i ) {
+        lar.insert( i, 4+i );
+        std::cout << lar << std::endl;
+    }
+}
+
 //// insert in the middle 2
 //void test3()
 //{
@@ -1124,7 +1124,7 @@ int main(int argc, char *argv[] ) {
     //    }
     //}
 
-  test1();
+  test2();
 
     return 0;
 }
