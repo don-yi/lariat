@@ -396,7 +396,7 @@ typename Lariat<T, Size>::LNode* Lariat<T, Size>::split(LNode* node)
 
 template <typename T, int Size>
 typename Lariat<T, Size>::LNode* Lariat<T, Size>::split(
-  LNode* node, const int ind, /*T const& poppedElem,*/ T const & val
+  LNode* node, const int ind, T const & val
 )
 {
   // Allocate and link the new node.
@@ -420,9 +420,16 @@ typename Lariat<T, Size>::LNode* Lariat<T, Size>::split(
   // Move the values according to the inserting index.
   if (ind <= asize_ / 2)
   {
-    for (auto i = 0; i < asize_ / 2; ++i)
+    // Handle number of moves for even and odd array size.
+    auto numMv = asize_ / 2;
+    if (asize_ % 2)
     {
-      add_value(newNode, i, node->values[asize_ - asize_ / 2 + i]);
+      ++numMv;
+    }
+
+    for (auto i = 0; i < numMv; ++i)
+    {
+      add_value(newNode, i, node->values[asize_ - numMv + i]);
       remove_value(node);
     }
     //add_value(newNode, i, poppedElem);
@@ -458,7 +465,7 @@ template <typename T, int Size>
 int Lariat<T, Size>::find_element(const int ind, LNode** localNode)
 {
   auto localInd = ind;
-  while ((*localNode)->next && localInd >= 0)
+  while ((*localNode)->next && localInd >= 0 && localInd > (*localNode)->count)
   {
     localInd -= (*localNode)->count;
     *localNode = (*localNode)->next;

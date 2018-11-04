@@ -54,42 +54,42 @@ void test2()
     }
 }
 
-//// insert in the middle 2
-//void test3()
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    const int asize = 7;
-//    Lariat<int, asize> lar;
-//    lar.insert( 0, 1 );
-//    lar.insert( 1, 2 );
-//    lar.insert( 2, 3 );
-//    lar.insert( 3, 4 );
-//
-//    for( int i = 1; i < 14; ++i ) {
-//        lar.insert( 2, 4+i );
-//        std::cout << lar << std::endl;
-//    }
-//}
-//
-//// illegal insert 
-//void test4()
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    const int asize = 12;
-//    Lariat<int, asize> lar;
-//    lar.insert( 0, 1 );
-//    lar.insert( 1, 2 );
-//    lar.insert( 2, 3 );
-//    lar.insert( 3, 4 );
-//
-//    try {
-//        lar.insert( 5, 5 );
-//        std::cout << lar << std::endl;
-//    } catch ( LariatException & le ) {
-//        std::cout << "Somethingbad happened: " << le.what() << std::endl;
-//    }
-//}
-//
+// insert in the middle 2
+void test3()
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    const int asize = 7;
+    Lariat<int, asize> lar;
+    lar.insert( 0, 1 );
+    lar.insert( 1, 2 );
+    lar.insert( 2, 3 );
+    lar.insert( 3, 4 );
+
+    for( int i = 1; i < 14; ++i ) {
+        lar.insert( 2, 4+i );
+        std::cout << lar << std::endl;
+    }
+}
+
+// illegal insert 
+void test4()
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    const int asize = 12;
+    Lariat<int, asize> lar;
+    lar.insert( 0, 1 );
+    lar.insert( 1, 2 );
+    lar.insert( 2, 3 );
+    lar.insert( 3, 4 );
+
+    try {
+        lar.insert( 5, 5 );
+        std::cout << lar << std::endl;
+    } catch ( LariatException & le ) {
+        std::cout << "Somethingbad happened: " << le.what() << std::endl;
+    }
+}
+
 //void test5()
 //{
 //    std::cout << "-------- " << __func__ << " --------\n";
@@ -1124,7 +1124,7 @@ int main(int argc, char *argv[] ) {
     //    }
     //}
 
-  test2();
+  test4();
 
     return 0;
 }
