@@ -90,36 +90,36 @@ void test4()
     }
 }
 
-//void test5()
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    const int asize = 20;
-//    Lariat<int, asize> lar;
-//    lar.insert( 0, 1 );
-//    lar.insert( 1, 2 );
-//    lar.insert( 2, 3 );
-//    lar.insert( 3, 4 );
-//
-//    for( int i = 1; i < 14; ++i ) {
-//        lar.insert( 2, 4+i );
-//    }
-//    std::cout << lar << std::endl;
-//}
-//
-//void test6() // delete middle - single node
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    const int asize = 6;
-//    Lariat<int, asize> lar;
-//    lar.insert( 0, 1 );
-//    lar.insert( 1, 2 );
-//    lar.insert( 2, 3 );
-//    lar.insert( 3, 4 );
-//    std::cout << lar << std::endl;
-//    lar.erase( 1 );
-//    std::cout << lar << std::endl;
-//}
-//
+void test5()
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    const int asize = 20;
+    Lariat<int, asize> lar;
+    lar.insert( 0, 1 );
+    lar.insert( 1, 2 );
+    lar.insert( 2, 3 );
+    lar.insert( 3, 4 );
+
+    for( int i = 1; i < 14; ++i ) {
+        lar.insert( 2, 4+i );
+    }
+    std::cout << lar << std::endl;
+}
+
+void test6() // delete middle - single node
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    const int asize = 6;
+    Lariat<int, asize> lar;
+    lar.insert( 0, 1 );
+    lar.insert( 1, 2 );
+    lar.insert( 2, 3 );
+    lar.insert( 3, 4 );
+    std::cout << lar << std::endl;
+    lar.erase( 1 );
+    std::cout << lar << std::endl;
+}
+
 //void test7() // delete front  - single node
 //{
 //    std::cout << "-------- " << __func__ << " --------\n";
@@ -1124,7 +1124,7 @@ int main(int argc, char *argv[] ) {
     //    }
     //}
 
-  test4();
+  test6();
 
     return 0;
 }

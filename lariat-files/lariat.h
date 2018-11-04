@@ -164,7 +164,7 @@ void Lariat<T, Size>::insert(const int index, const T& value)
   // The first thing to this function is to check for an Out of Bounds error.
   if (index < 0 || index > size_)
   {
-    LariatException(
+    throw LariatException(
       LariatException::LARIAT_EXCEPTION::E_BAD_INDEX,
       "Subscript is out of range"
     );
