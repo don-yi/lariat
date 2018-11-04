@@ -100,11 +100,10 @@ private:
   void add_value(LNode* node, int ind, T const& val);
   void remove_value(LNode* node/*, size_t ind, T const& val*/);
   void kick_start();
-  void move_half_values(LNode* src, LNode* dest);
   LNode* split(LNode* node);
+  LNode* split(LNode* node, int ind, /*T const& poppedElem,*/ T const& val);
   void shift_up(LNode* node, int ind);
-  //  - findElement
-  LNode* find_node(int ind);
+  int find_element(int ind, LNode** localNode);
   //  - shiftDown
 };
 
@@ -184,19 +183,24 @@ void Lariat<T, Size>::insert(const int index, const T& value)
   else
   {
     // First, find the node and local index of the element being inserted.
-    auto* localNode = find_node(index);
-    auto localInd = (index - 1) % asize_;
+    LNode* localNode = head_;
+    const auto localInd = find_element(index, &localNode);
 
+    // If the node is full, you will need to keep track of the last element in
+    // the node before you shift all the elements to the right.
     if (localNode->count == asize_)
     {
-      auto* newNode = split(localNode);
-      add_value(newNode, 0, localNode->values[localNode->count]);
-      remove_value(localNode);
+      // Next, you will need to split the node.
+      // You will need to transfer the overflow to the last element of the new
+      // node created by the split.
+      split(localNode, localInd, value);
     }
-
-    // Next, shift all elements past that local index one element to the right.
-    shift_up(localNode, localInd);
-    add_value(localNode, localInd, value);
+    else
+    {
+      // Next, shift all elements past that local index one element to the right.
+      shift_up(localNode, localInd);
+      add_value(localNode, localInd, value);
+    }
   }
 }
 
@@ -213,7 +217,6 @@ void Lariat<T, Size>::push_back(const T& value)
   else if (tail_->count == asize_)
   {
     tail_ = split(tail_);
-    move_half_values(tail_->prev, tail_);
   }
 
   add_value(tail_, tail_->count, value);
@@ -234,7 +237,6 @@ void Lariat<T, Size>::push_front(const T& value)
   else if (head_->count == asize_)
   {
     auto* tmp = split(head_);
-    move_half_values(head_, tmp);
     shift_up(head_, 0);
 
     // In order to account for splitting the only node in the linked list, you
@@ -365,18 +367,9 @@ void Lariat<T, Size>::kick_start()
 }
 
 template <typename T, int Size>
-void Lariat<T, Size>::move_half_values(LNode* src, LNode* dest)
-{
-  for (auto i = 0; i < asize_ / 2; ++i)
-  {
-    add_value(dest, i, src->values[asize_ - (asize_ / 2) + i]);
-    remove_value(src);
-  }
-}
-
-template <typename T, int Size>
 typename Lariat<T, Size>::LNode* Lariat<T, Size>::split(LNode* node)
 {
+  // Allocate and link the new node.
   LNode* tmp = nullptr;
   if (node->next)
   {
@@ -388,6 +381,65 @@ typename Lariat<T, Size>::LNode* Lariat<T, Size>::split(LNode* node)
   {
     newNode->next = tmp;
     tmp->prev = newNode;
+  }
+
+  // Move the half of the values.
+  const auto numMove = asize_ / 2;
+  for (auto i = 0; i < numMove; ++i)
+  {
+    add_value(newNode, i, node->values[asize_ - numMove + i]);
+    remove_value(node);
+  }
+
+  return newNode;
+}
+
+template <typename T, int Size>
+typename Lariat<T, Size>::LNode* Lariat<T, Size>::split(
+  LNode* node, const int ind, /*T const& poppedElem,*/ T const & val
+)
+{
+  // Allocate and link the new node.
+  LNode* tmp = nullptr;
+  if (node->next)
+  {
+    tmp = node->next;
+  }
+  auto* newNode = allocate();
+  node->next = newNode;
+  if (tmp)
+  {
+    newNode->next = tmp;
+    tmp->prev = newNode;
+  }
+  else
+  {
+    tail_ = newNode;
+  }
+
+  // Move the values according to the inserting index.
+  if (ind <= asize_ / 2)
+  {
+    for (auto i = 0; i < asize_ / 2; ++i)
+    {
+      add_value(newNode, i, node->values[asize_ - asize_ / 2 + i]);
+      remove_value(node);
+    }
+    //add_value(newNode, i, poppedElem);
+    shift_up(node, ind);
+    add_value(node, ind, val);
+  }
+  else
+  {
+    for (auto i = 0; i < asize_ / 2 - 1; ++i)
+    {
+      add_value(newNode, i, node->values[asize_ - asize_ / 2 + i + 1]);
+      remove_value(node);
+    }
+    //add_value(newNode, i, poppedElem);
+    auto const localInd = ind - asize_ / 2 - 1;
+    shift_up(newNode, localInd);
+    add_value(newNode, localInd, val);
   }
 
   return newNode;
@@ -403,16 +455,17 @@ void Lariat<T, Size>::shift_up(LNode* node, int ind)
 }
 
 template <typename T, int Size>
-typename Lariat<T, Size>::LNode* Lariat<T, Size>::find_node(const int ind)
+int Lariat<T, Size>::find_element(const int ind, LNode** localNode)
 {
-  auto* res = head_;
-  for (auto i = 0; i < (ind - 1) / asize_; i++)
+  auto localInd = ind;
+  while ((*localNode)->next && localInd >= 0)
   {
-    res = res->next;
+    localInd -= (*localNode)->count;
+    *localNode = (*localNode)->next;
   }
-  return res;
-}
 
+  return localInd;
+}
 
 #else // fancier 
 #endif
