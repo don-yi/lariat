@@ -98,13 +98,13 @@ private:
   //+ Recommended Helper Functions
   LNode* allocate();
   void add_value(LNode* node, int ind, T const& val);
-  void remove_value(LNode* node/*, size_t ind, T const& val*/);
+  void remove_value(LNode* node);
   void kick_start();
   LNode* split(LNode* node);
-  LNode* split(LNode* node, int ind, /*T const& poppedElem,*/ T const& val);
+  LNode* split(LNode* node, int ind, T const& val);
   void shift_up(LNode* node, int ind);
+  void shift_down(LNode* node, int ind);
   int find_element(int ind, LNode** localNode);
-  //  - shiftDown
 };
 
 //#include "lariat.cpp"
@@ -258,18 +258,53 @@ void Lariat<T, Size>::push_front(const T& value)
 }
 
 template <typename T, int Size>
-void Lariat<T, Size>::erase(int index)
+void Lariat<T, Size>::erase(const int index)
 {
+  // You can use the pop_back and pop_front functions if the index requested is
+    // the first or last element.
+  if (index == size_)
+  {
+    pop_back();
+    return;
+  }
+  if (index == 0)
+  {
+    pop_front();
+    return;
+  }
+
+  // First, find the containing node and local index of the requested global
+    // index.
+  LNode* localNode = head_;
+  const auto localInd = find_element(index, &localNode);
+
+  // Shift all the elements in the node beyond the local index left one element,
+    // covering the element being erased.
+  shift_down(localNode,localInd);
 }
 
 template <typename T, int Size>
 void Lariat<T, Size>::pop_back()
 {
+  // Decrement the count of the tail node.
+  --tail_->count;
+  --size_;
 }
 
 template <typename T, int Size>
 void Lariat<T, Size>::pop_front()
 {
+  // Shift all elements in the head node down one element.
+  // Decrement the head's count.
+  shift_down(head_, 0);
+
+  // If the head node is now empty, free the associated memory.
+  if (head_->count <= 0)
+  {
+    auto* emptyHead = head_;
+    head_ = head_->next;
+    delete emptyHead;
+  }
 }
 
 template <typename T, int Size>
@@ -346,15 +381,8 @@ void Lariat<T, Size>::add_value(LNode* node, int ind, T const& val)
 }
 
 template <typename T, int Size>
-void Lariat<T, Size>::remove_value(LNode* node/*, size_t ind, T const& val*/)
+void Lariat<T, Size>::remove_value(LNode* node)
 {
-  //// todo
-  //if (ind + 1 % asize_)
-  //{
-  //  //for
-  //  //node->values[]
-  //}
-
   --node->count;
   --size_;
 }
@@ -459,6 +487,17 @@ void Lariat<T, Size>::shift_up(LNode* node, int ind)
   {
     node->values[i + 1] = node->values[i];
   }
+}
+
+template <typename T, int Size>
+void Lariat<T, Size>::shift_down(LNode* node, int ind)
+{
+  for (auto i = ind; i < node->count - 1; ++i)
+  {
+    node->values[i] = node->values[i + 1];
+  }
+  --node->count;
+  --size_;
 }
 
 template <typename T, int Size>
