@@ -508,7 +508,7 @@ template <typename T, int Size>
 int Lariat<T, Size>::find_element(const int ind, LNode** localNode)
 {
   auto localInd = ind;
-  while ((*localNode)->next && localInd >= 0 && localInd > (*localNode)->count)
+  while ((*localNode)->next && localInd >= 0 && localInd >= (*localNode)->count)
   {
     localInd -= (*localNode)->count;
     *localNode = (*localNode)->next;
