@@ -210,21 +210,21 @@ void test12() // push_back push_front
     std::cout << lar << std::endl;
 }
 
-//void test13() // use index to print
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    const int asize = 11;
-//    Lariat<int, asize> lar;
-//    for( int i = 1; i <= 12; ++i ) {
-//        lar.insert( i-1, i );
-//    }
-//    std::cout << lar << std::endl;
-//    for( int i = 0; i < 11; ++i ) {
-//        std::cout << lar[i] << " ";
-//    }
-//    std::cout << std::endl;
-//}
-//
+void test13() // use index to print
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    const int asize = 11;
+    Lariat<int, asize> lar;
+    for( int i = 1; i <= 12; ++i ) {
+        lar.insert( i-1, i );
+    }
+    std::cout << lar << std::endl;
+    for( int i = 0; i < 11; ++i ) {
+        std::cout << lar[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
 //void test14() // compact
 //{
 //    std::cout << "-------- " << __func__ << " --------\n";
@@ -1124,7 +1124,7 @@ int main(int argc, char *argv[] ) {
     //    }
     //}
 
-  test12();
+  test13();
 
     return 0;
 }

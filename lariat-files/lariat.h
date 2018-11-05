@@ -318,7 +318,9 @@ void Lariat<T, Size>::pop_front()
 template <typename T, int Size>
 T& Lariat<T, Size>::operator[](int index)
 {
-  return {};
+  auto* localNode = head_;
+  const auto localInd = find_element(index, &localNode);
+  return localNode->values[localInd];
 }
 
 template <typename T, int Size>
