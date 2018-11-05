@@ -94,8 +94,6 @@ private:
   mutable int nodecount_; // the number of nodes in the list
   int asize_;             // the size of the array within the nodes
 
-  // todo
-  //+ Recommended Helper Functions
   LNode* allocate();
   void deallocate(LNode* deleteFrom);
   void add_value(LNode* node, int ind, T const& val);
@@ -353,13 +351,33 @@ T const& Lariat<T, Size>::last() const
 template <typename T, int Size>
 unsigned Lariat<T, Size>::find(const T& value) const
 {
-  return 0;
+  // Walk the list in a similar fashion to that detailed in the findElement
+    // helper function, but check equivalence for each element in each node,
+    // returning the index when the desired element is found.
+  auto* walker = head_;
+  auto ind = -1;
+  while (walker)
+  {
+    for (auto i = 0; i < walker->count; ++i)
+    {
+      ++ind;
+      if (walker->values[i] == value)
+      {
+        return static_cast<unsigned>(ind);
+      }
+    }
+    walker = walker->next;
+  }
+
+  // If the desired element is not found, return the total number of elements
+    // contained in the data structure.
+  return size_;
 }
 
 template <typename T, int Size>
 size_t Lariat<T, Size>::size() const
 {
-  return 0;
+  return size_;
 }
 
 template <typename T, int Size>
@@ -390,6 +408,7 @@ void Lariat<T, Size>::compact()
       // foot in the left foot's node, and steps the left foot to the next node
       // when it is filled.
     const auto rtot = rft->count;
+    size_ -= rft->count;
     rft->count = 0;
     for (auto i = 0; i < rtot; ++i)
     {

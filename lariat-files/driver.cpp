@@ -240,51 +240,51 @@ void test14() // compact
     std::cout << lar << std::endl;
 }
 
-//void test15() // compact and use
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    const int asize = 6;
-//    Lariat<int, asize> lar;
-//    for( int i = 0; i <= 17; ++i ) {
-//        lar.push_front( i+1 );
-//    }
-//    std::cout << "Before compacting" << std::endl;
-//    std::cout << lar << std::endl;
-//    lar.compact();
-//    std::cout << "After compacting" << std::endl;
-//    std::cout << lar << std::endl;
-//    for( int i = 0; i <= 8; ++i ) {
-//        lar.push_front( i+10 ); //breaks here
-//        lar.push_back( i+10 );
-//    }
-//    std::cout << "After adding more elements" << std::endl;
-//    std::cout << lar << std::endl;
-//}
-//
-//void test16() // compact and use find
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    const int asize = 6;
-//    Lariat<int, asize> lar;
-//    for( int i = 0; i <= 17; ++i ) {
-//        lar.push_front( i+1 );
-//    }
-//    std::cout << "Before compacting" << std::endl;
-//    std::cout << lar << std::endl;
-//    lar.compact();
-//    std::cout << "After compacting" << std::endl;
-//    std::cout << lar << std::endl;
-//    for( int i = -1; i <= 19; ++i ) {
-//        unsigned pos = lar.find( i+1 );
-//        std::cout << "find " << i+1;
-//        if ( pos == lar.size() ) {
-//            std::cout << ":   not found " << std::endl;
-//        } else {
-//            std::cout << ":   position " << pos << std::endl;
-//        }
-//    }
-//}
-//
+void test15() // compact and use
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    const int asize = 6;
+    Lariat<int, asize> lar;
+    for( int i = 0; i <= 17; ++i ) {
+        lar.push_front( i+1 );
+    }
+    std::cout << "Before compacting" << std::endl;
+    std::cout << lar << std::endl;
+    lar.compact();
+    std::cout << "After compacting" << std::endl;
+    std::cout << lar << std::endl;
+    for( int i = 0; i <= 8; ++i ) {
+        lar.push_front( i+10 ); //breaks here
+        lar.push_back( i+10 );
+    }
+    std::cout << "After adding more elements" << std::endl;
+    std::cout << lar << std::endl;
+}
+
+void test16() // compact and use find
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    const int asize = 6;
+    Lariat<int, asize> lar;
+    for( int i = 0; i <= 17; ++i ) {
+        lar.push_front( i+1 );
+    }
+    std::cout << "Before compacting" << std::endl;
+    std::cout << lar << std::endl;
+    lar.compact();
+    std::cout << "After compacting" << std::endl;
+    std::cout << lar << std::endl;
+    for( int i = -1; i <= 19; ++i ) {
+        unsigned pos = lar.find( i+1 );
+        std::cout << "find " << i+1;
+        if ( pos == lar.size() ) {
+            std::cout << ":   not found " << std::endl;
+        } else {
+            std::cout << ":   position " << pos << std::endl;
+        }
+    }
+}
+
 //void test17() // efficiency of push_back / pop_back
 //{
 //    std::cout << "-------- " << __func__ << " --------\n";
@@ -1124,7 +1124,7 @@ int main(int argc, char *argv[] ) {
     //    }
     //}
 
-  test14();
+  test16();
 
     return 0;
 }
