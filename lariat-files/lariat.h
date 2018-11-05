@@ -97,6 +97,7 @@ private:
   // todo
   //+ Recommended Helper Functions
   LNode* allocate();
+  void deallocate(LNode* deleteFrom);
   void add_value(LNode* node, int ind, T const& val);
   void remove_value(LNode* node);
   void kick_start();
@@ -148,13 +149,7 @@ Lariat<T, Size>::Lariat(Lariat const& rhs): head_(nullptr), tail_(nullptr)
 template <typename T, int Size>
 Lariat<T, Size>::~Lariat()
 {
-  auto* walker = head_;
-  while (walker)
-  {
-    auto* tmp = walker->next;
-    delete walker;
-    walker = tmp;
-  }
+  deallocate(head_);
 }
 
 template <typename T, int Size>
@@ -326,7 +321,9 @@ T& Lariat<T, Size>::operator[](int index)
 template <typename T, int Size>
 const T& Lariat<T, Size>::operator[](int index) const
 {
-  return {};
+  auto* localNode = head_;
+  const auto localInd = find_element(index, &localNode);
+  return localNode->values[localInd];
 }
 
 template <typename T, int Size>
@@ -370,9 +367,51 @@ void Lariat<T, Size>::clear()
 {
 }
 
+// Compact takes all the data stored in the linked list and moves it into the
+  // smallest number of nodes possible. Then it frees all empty nodes at the
+  // end of the list.
 template <typename T, int Size>
 void Lariat<T, Size>::compact()
 {
+  // First, loop through the list with both feet until the left node is not
+    // already full and the right foot hasn't walked off the list.
+  auto* lft = head_;
+  auto* rft = head_->next;
+  while (lft->count == asize_ && rft)
+  {
+    rft = rft->next;
+    lft = lft->next;
+  }
+
+  // Next, walk through the list while the right foot hasn't lost the list.
+  while (rft)
+  {
+    // This loop should have a nested loop that stores each value from the right
+      // foot in the left foot's node, and steps the left foot to the next node
+      // when it is filled.
+    const auto rtot = rft->count;
+    rft->count = 0;
+    for (auto i = 0; i < rtot; ++i)
+    {
+      add_value(lft, lft->count, rft->values[i]);
+      
+      if (lft->count == asize_)
+      {
+        lft = lft->next;
+      }
+    }
+    rft = rft->next;
+  }
+
+  // Delete empty nodes.
+  if (lft->count == 0)
+  {
+    deallocate(lft);
+  }
+  else if (lft->next)
+  {
+    deallocate(lft->next);
+  }
 }
 
 template <typename T, int Size>
@@ -380,6 +419,32 @@ typename Lariat<T, Size>::LNode* Lariat<T, Size>::allocate()
 {
   ++nodecount_;
   return new LNode;
+}
+
+template <typename T, int Size>
+void Lariat<T, Size>::deallocate(LNode* deleteFrom)
+{
+  // Handle the tail pointer.
+  if (deleteFrom->prev)
+  {
+    tail_ = deleteFrom->prev;
+    deleteFrom->prev->next = nullptr;
+  }
+  // Handle the head pointer.
+  else if (deleteFrom == head_)
+  {
+    head_ = nullptr;
+    tail_ = nullptr;
+  }
+
+  // Walk and delete.
+  auto* walker = deleteFrom;
+  while (walker)
+  {
+    auto* tmp = walker->next;
+    delete walker;
+    walker = tmp;
+  }
 }
 
 template <typename T, int Size>

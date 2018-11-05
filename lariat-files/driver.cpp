@@ -225,21 +225,21 @@ void test13() // use index to print
     std::cout << std::endl;
 }
 
-//void test14() // compact
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    const int asize = 6;
-//    Lariat<int, asize> lar;
-//    for( int i = 0; i <= 17; ++i ) {
-//        lar.push_front( i+1 );
-//    }
-//    std::cout << "Before compacting" << std::endl;
-//    std::cout << lar << std::endl;
-//    lar.compact();
-//    std::cout << "After compacting" << std::endl;
-//    std::cout << lar << std::endl;
-//}
-//
+void test14() // compact
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    const int asize = 6;
+    Lariat<int, asize> lar;
+    for( int i = 0; i <= 17; ++i ) {
+        lar.push_front( i+1 );
+    }
+    std::cout << "Before compacting" << std::endl;
+    std::cout << lar << std::endl;
+    lar.compact();
+    std::cout << "After compacting" << std::endl;
+    std::cout << lar << std::endl;
+}
+
 //void test15() // compact and use
 //{
 //    std::cout << "-------- " << __func__ << " --------\n";
@@ -1124,7 +1124,7 @@ int main(int argc, char *argv[] ) {
     //    }
     //}
 
-  test13();
+  test14();
 
     return 0;
 }
