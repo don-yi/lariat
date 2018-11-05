@@ -180,36 +180,36 @@ void test10() // delete front  - second node in list
     std::cout << lar << std::endl;
 }
 
-//void test11() // delete last  - second node in list
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    const int asize = 4;
-//    Lariat<int, asize> lar;
-//    lar.insert( 0, 1 );
-//    lar.insert( 1, 2 );
-//    lar.insert( 2, 3 );
-//    lar.insert( 3, 4 );
-//    lar.insert( 4, 5 );
-//    lar.insert( 5, 6 );
-//    std::cout << lar << std::endl;
-//    lar.erase( 5 );
-//    std::cout << lar << std::endl;
-//}
-//
-//void test12() // push_back push_front
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    const int asize = 4;
-//    Lariat<int, asize> lar;
-//    for( int i = 0; i < 11; ++i ) {
-//        lar.push_front( i );
-//    }
-//    for( int i = 0; i < 11; ++i ) {
-//        lar.push_back( 10+i );
-//    }
-//    std::cout << lar << std::endl;
-//}
-//
+void test11() // delete last  - second node in list
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    const int asize = 4;
+    Lariat<int, asize> lar;
+    lar.insert( 0, 1 );
+    lar.insert( 1, 2 );
+    lar.insert( 2, 3 );
+    lar.insert( 3, 4 );
+    lar.insert( 4, 5 );
+    lar.insert( 5, 6 );
+    std::cout << lar << std::endl;
+    lar.erase( 5 );
+    std::cout << lar << std::endl;
+}
+
+void test12() // push_back push_front
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    const int asize = 4;
+    Lariat<int, asize> lar;
+    for( int i = 0; i < 11; ++i ) {
+        lar.push_front( i );
+    }
+    for( int i = 0; i < 11; ++i ) {
+        lar.push_back( 10+i );
+    }
+    std::cout << lar << std::endl;
+}
+
 //void test13() // use index to print
 //{
 //    std::cout << "-------- " << __func__ << " --------\n";
@@ -1124,7 +1124,7 @@ int main(int argc, char *argv[] ) {
     //    }
     //}
 
-  test10();
+  test12();
 
     return 0;
 }

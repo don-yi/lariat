@@ -100,11 +100,12 @@ private:
   void add_value(LNode* node, int ind, T const& val);
   void remove_value(LNode* node);
   void kick_start();
-  LNode* split(LNode* node);
+  LNode* split(LNode* node, bool isPushBack = false);
   LNode* split(LNode* node, int ind, T const& val);
   void shift_up(LNode* node, int ind);
   void shift_down(LNode* node, int ind);
   int find_element(int ind, LNode** localNode);
+  void link(LNode* prev, LNode* next);
 };
 
 //#include "lariat.cpp"
@@ -216,7 +217,7 @@ void Lariat<T, Size>::push_back(const T& value)
   // Increment the tail node's count.
   else if (tail_->count == asize_)
   {
-    tail_ = split(tail_);
+    link(tail_, split(tail_, true));
   }
 
   add_value(tail_, tail_->count, value);
@@ -236,15 +237,22 @@ void Lariat<T, Size>::push_front(const T& value)
   // Next you will need to split the node.
   else if (head_->count == asize_)
   {
-    auto* tmp = split(head_);
-    shift_up(head_, 0);
-
     // In order to account for splitting the only node in the linked list, you
     // will have to update the tail_ pointer as necessary.
-    if (head_ == tail_)
-    {
-      tail_ = tmp;
-    }
+    auto* oldHead = head_;
+    link(head_, split(head_));
+
+    //// Move the half of the values.
+    //auto numMv = asize_ / 2;
+    //// Handle even array size.
+    //if (!(asize_ % 2))
+    //{
+    //  --numMv;
+    //}
+    //for (auto i = 0; i < numMv; ++i)
+    //{
+      shift_up(oldHead, 0);
+    //}
   }
   // If the head node isn't full yet, just shift the head node up an element
   // from element 0 and increase the count.
@@ -395,25 +403,15 @@ void Lariat<T, Size>::kick_start()
 }
 
 template <typename T, int Size>
-typename Lariat<T, Size>::LNode* Lariat<T, Size>::split(LNode* node)
+typename Lariat<T, Size>::LNode* Lariat<T, Size>::split(
+  LNode* node, const bool isPushBack
+)
 {
-  // Allocate and link the new node.
-  LNode* tmp = nullptr;
-  if (node->next)
-  {
-    tmp = node->next;
-  }
   auto* newNode = allocate();
-  node->next = newNode;
-  if (tmp)
-  {
-    newNode->next = tmp;
-    tmp->prev = newNode;
-  }
 
   // Move the half of the values.
   auto numMv = asize_ / 2;
-  if (!(asize_ % 2))
+  if (isPushBack && !(asize_ % 2))
   {
     --numMv;
   }
@@ -494,7 +492,7 @@ void Lariat<T, Size>::shift_up(LNode* node, int ind)
 }
 
 template <typename T, int Size>
-void Lariat<T, Size>::shift_down(LNode* node, int ind)
+void Lariat<T, Size>::shift_down(LNode* node, const int ind)
 {
   for (auto i = ind; i < node->count - 1; ++i)
   {
@@ -515,6 +513,27 @@ int Lariat<T, Size>::find_element(const int ind, LNode** localNode)
   }
 
   return localInd;
+}
+
+template <typename T, int Size>
+void Lariat<T, Size>::link(LNode* prev, LNode* next)
+{
+  next->next = prev->next;
+  if (next->next)
+  {
+    next->next->prev = next;
+  }
+  prev->next = next;
+  next->prev = prev;
+
+  if (next == head_)
+  {
+    head_ = prev;
+  }
+  if (prev == tail_)
+  {
+    tail_ = next;
+  }
 }
 
 #else // fancier 
