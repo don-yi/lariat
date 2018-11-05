@@ -285,72 +285,72 @@ void test16() // compact and use find
     }
 }
 
-//void test17() // efficiency of push_back / pop_back
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    const int asize = 6;
-//    Lariat<int, asize> lar;
-//    for( int i = 0; i < 1<<25; ++i ) {
-//        lar.push_back( i+1 );
-//    }
-//    std::cout << "Size = " << lar.size() << std::endl;
-//    for( int i = 0; i < 1<<25; ++i ) {
-//        lar.pop_back( );
-//    }
-//    std::cout << "Size = " << lar.size() << std::endl;
-//
-//    lar.compact(); // compact empty lariat
-//}
-//
-//void test18() // efficiency of find
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    const int asize = 6;
-//    Lariat<int, asize> lar;
-//    for( int i = 0; i < 1<<15; ++i ) {
-//        lar.push_back( i+1 );
-//    }
-//    std::cout << "Size = " << lar.size() << std::endl;
-//    for ( unsigned i = 1<<14; i < 1<<15; ++i ) {
-//        if ( i != lar.find( i+1 ) ) {
-//            std::cout << "Find failed\n";
-//        }
-//    }
-//}
-//
-//void test19() // copy ctor - basic tests
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    const int asize = 6;
-//    Lariat<int, asize> lar;
-//    for( int i = 50; i < 100; ++i ) {
-//        lar.push_back( i+1 );
-//    }
-//    for( int i = 49; i >=0; --i ) {
-//        lar.push_front( i+1 );
-//    }
-//    std::cout << "Size = " << lar.size() << std::endl;
-//
-//    Lariat<int, asize> lar_copy( lar );
-//
-//    // check content of the copy
-//    for ( unsigned i = 0; i < 50; ++i ) {
-//        if ( i != lar_copy.find( i+1 ) ) {
-//            std::cout << "Find failed\n";
-//        }
-//    }
-//
-//    lar_copy.clear();
-//    std::cout << "Size = " << lar_copy.size() << std::endl;
-//
-//    // check content of the original
-//    for ( unsigned i = 0; i < 50; ++i ) {
-//        if ( i != lar.find( i+1 ) ) {
-//            std::cout << "Find failed\n";
-//        }
-//    }
-//}
-//
+void test17() // efficiency of push_back / pop_back
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    const int asize = 6;
+    Lariat<int, asize> lar;
+    for( int i = 0; i < 1<<25; ++i ) {
+        lar.push_back( i+1 );
+    }
+    std::cout << "Size = " << lar.size() << std::endl;
+    for( int i = 0; i < 1<<25; ++i ) {
+        lar.pop_back( );
+    }
+    std::cout << "Size = " << lar.size() << std::endl;
+
+    lar.compact(); // compact empty lariat
+}
+
+void test18() // efficiency of find
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    const int asize = 6;
+    Lariat<int, asize> lar;
+    for( int i = 0; i < 1<<15; ++i ) {
+        lar.push_back( i+1 );
+    }
+    std::cout << "Size = " << lar.size() << std::endl;
+    for ( unsigned i = 1<<14; i < 1<<15; ++i ) {
+        if ( i != lar.find( i+1 ) ) {
+            std::cout << "Find failed\n";
+        }
+    }
+}
+
+void test19() // copy ctor - basic tests
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    const int asize = 6;
+    Lariat<int, asize> lar;
+    for( int i = 50; i < 100; ++i ) {
+        lar.push_back( i+1 );
+    }
+    for( int i = 49; i >=0; --i ) {
+        lar.push_front( i+1 );
+    }
+    std::cout << "Size = " << lar.size() << std::endl;
+
+    Lariat<int, asize> lar_copy( lar );
+
+    // check content of the copy
+    for ( unsigned i = 0; i < 50; ++i ) {
+        if ( i != lar_copy.find( i+1 ) ) {
+            std::cout << "Find failed\n";
+        }
+    }
+
+    lar_copy.clear();
+    std::cout << "Size = " << lar_copy.size() << std::endl;
+
+    // check content of the original
+    for ( unsigned i = 0; i < 50; ++i ) {
+        if ( i != lar.find( i+1 ) ) {
+            std::cout << "Find failed\n";
+        }
+    }
+}
+
 //void test20() // assignment - basic tests
 //{
 //    std::cout << "-------- " << __func__ << " --------\n";
@@ -1124,7 +1124,7 @@ int main(int argc, char *argv[] ) {
     //    }
     //}
 
-  test16();
+  test19();
 
     return 0;
 }

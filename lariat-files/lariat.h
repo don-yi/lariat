@@ -105,6 +105,7 @@ private:
   void shift_down(LNode* node, int ind);
   int find_element(int ind, LNode** localNode);
   void link(LNode* prev, LNode* next);
+  void copy_values(LNode* original, LNode* copy);
 };
 
 //#include "lariat.cpp"
@@ -142,6 +143,38 @@ Lariat<T, Size>::Lariat()
 template <typename T, int Size>
 Lariat<T, Size>::Lariat(Lariat const& rhs): head_(nullptr), tail_(nullptr)
 {
+  asize_ = rhs.asize_;
+
+  auto* walker = rhs.head_;
+  LNode* prev = nullptr;
+  while (walker)
+  {
+    LNode* newNode = nullptr;
+    // Kick start the copy.
+    if (!head_ && !tail_)
+    {
+      kick_start();
+      newNode = head_;
+      prev = head_;
+    }
+    else
+    {
+      newNode = allocate();
+      if (!prev)
+      {
+        prev = newNode;
+      }
+    }
+
+    copy_values(walker, newNode);
+    link(prev, newNode);
+    
+    walker = walker->next;
+    if (prev && prev->next)
+    {
+      prev = prev->next;
+    }
+  }
 }
 
 template <typename T, int Size>
@@ -383,6 +416,7 @@ size_t Lariat<T, Size>::size() const
 template <typename T, int Size>
 void Lariat<T, Size>::clear()
 {
+  size_ = 0;
 }
 
 // Compact takes all the data stored in the linked list and moves it into the
@@ -619,6 +653,15 @@ void Lariat<T, Size>::link(LNode* prev, LNode* next)
   if (prev == tail_)
   {
     tail_ = next;
+  }
+}
+
+template <typename T, int Size>
+void Lariat<T, Size>::copy_values(LNode* original, LNode* copy)
+{
+  for (auto i = 0; i < original->count; ++i)
+  {
+    add_value(copy, i, original->values[i]);
   }
 }
 
