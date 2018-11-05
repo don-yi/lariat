@@ -412,10 +412,14 @@ typename Lariat<T, Size>::LNode* Lariat<T, Size>::split(LNode* node)
   }
 
   // Move the half of the values.
-  const auto numMove = asize_ / 2;
-  for (auto i = 0; i < numMove; ++i)
+  auto numMv = asize_ / 2;
+  if (!(asize_ % 2))
   {
-    add_value(newNode, i, node->values[asize_ - numMove + i]);
+    --numMv;
+  }
+  for (auto i = 0; i < numMv; ++i)
+  {
+    add_value(newNode, i, node->values[asize_ - numMv + i]);
     remove_value(node);
   }
 
