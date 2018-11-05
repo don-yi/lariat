@@ -45,7 +45,20 @@ public:
   Lariat();                  // default constructor                        
   Lariat(Lariat const& rhs); // copy constructor
   ~Lariat(); // destructor
-  // more ctor(s) and assignment(s)
+
+  // todo:
+  template<typename U, int Size1>
+  Lariat(Lariat<U, Size1> const& rhs); // copy constructor
+
+  Lariat& operator=(Lariat const& rhs);
+
+  // todo:
+  template <typename U, int Size1>
+  friend class Lariat;
+
+// operator= (template)
+  // This assignment operator follows the exact same algorithm as the own-type
+    // version, but is a nested template like I described above.
 
   // inserts
   void insert(int index, T const& value);
@@ -79,7 +92,6 @@ public:
   void compact();             // push data in front reusing empty positions and delete remaining nodes
 
 private:
-  // DO NOT modify provided code
   struct LNode
   {
     LNode* next = nullptr;
@@ -87,7 +99,6 @@ private:
     int    count = 0;         // number of items currently in the node
     T values[Size];
   };
-  // DO NOT modify provided code
   LNode* head_;           // points to the first node
   LNode* tail_;           // points to the last node
   int size_;              // the number of items (not nodes) in the list
@@ -140,11 +151,14 @@ Lariat<T, Size>::Lariat()
 {
 }
 
+// This is the standard copy constructor. The function should loop through the
+  // instance passed in, pushing each element of the other onto the back of
+  // the one being constructed.
+// It should be done using the algorithm for (or directly calling) push_back
+  // so that all of the nodes are split correctly.
 template <typename T, int Size>
 Lariat<T, Size>::Lariat(Lariat const& rhs): head_(nullptr), tail_(nullptr)
 {
-  asize_ = rhs.asize_;
-
   auto* walker = rhs.head_;
   LNode* prev = nullptr;
   while (walker)
@@ -177,10 +191,49 @@ Lariat<T, Size>::Lariat(Lariat const& rhs): head_(nullptr), tail_(nullptr)
   }
 }
 
+// todo:
+template <typename T, int Size>
+template <typename U, int Size1>
+Lariat<T, Size>::Lariat(Lariat<U, Size1> const& rhs)
+: head_(nullptr), tail_(nullptr)
+{
+  auto* walker = rhs.head_;
+  while (walker)
+  {
+    for (auto i = 0; i < walker->count; i++)
+    {
+      push_back(static_cast<U>(walker->values[i]));
+    }
+    walker = walker->next;
+  }
+}
+
 template <typename T, int Size>
 Lariat<T, Size>::~Lariat()
 {
   deallocate(head_);
+}
+
+template <typename T, int Size>
+Lariat<T, Size>& Lariat<T, Size>::operator=(Lariat const& rhs)
+{
+  // Set the non-pointer members as necessary, clear this instance's
+    // data, then walk through the right-hand argument's list adding each
+    // element to this instance
+  asize_ = rhs.asize_;
+  clear();
+
+  auto* walker = rhs.head_;
+  while (walker)
+  {
+    for (auto i = 0; i < walker->count; i++)
+    {
+      push_back(walker->values[i]);
+    }
+    walker = walker->next;
+  }
+
+  return *this;
 }
 
 template <typename T, int Size>
@@ -417,6 +470,13 @@ template <typename T, int Size>
 void Lariat<T, Size>::clear()
 {
   size_ = 0;
+
+  auto* walker = head_;
+  while (walker)
+  {
+    walker->count = 0;
+    walker = walker->next;
+  }
 }
 
 // Compact takes all the data stored in the linked list and moves it into the

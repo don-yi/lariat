@@ -351,78 +351,78 @@ void test19() // copy ctor - basic tests
     }
 }
 
-//void test20() // assignment - basic tests
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    const int asize = 6;
-//    Lariat<int, asize> lar, lar2;
-//    for( int i = 50; i < 100; ++i ) {
-//        lar.push_back( i+1 );
-//        lar2.push_front( i+1 );
-//    }
-//    for( int i = 49; i >=0; --i ) {
-//        lar.push_front( i+1 );
-//        lar2.push_back( i+1 );
-//        lar2.push_front( 2*i+1 );
-//    }
-//    std::cout << "Size1 = " << lar.size() << std::endl;
-//    std::cout << "Size2 = " << lar2.size() << std::endl;
-//
-//    lar2 = lar;
-//    std::cout << "Size2 = " << lar2.size() << std::endl;
-//
-//    // check content of lar2
-//    for ( unsigned i = 0; i < 50; ++i ) {
-//        if ( i != lar2.find( i+1 ) ) {
-//            std::cout << "Find failed\n";
-//        }
-//    }
-//
-//    lar2.clear();
-//    std::cout << "Size2 = " << lar2.size() << std::endl;
-//
-//    // check content of the original
-//    for ( unsigned i = 0; i < 50; ++i ) {
-//        if ( i != lar.find( i+1 ) ) {
-//            std::cout << "Find failed\n";
-//        }
-//    }
-//}
-//
-//void test21() // copy ctor - different instantiations
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    const int asize = 6;
-//    Lariat<int, asize> lar;
-//    for( int i = 50; i < 100; ++i ) {
-//        lar.push_back( i+1 );
-//    }
-//    for( int i = 49; i >=0; --i ) {
-//        lar.push_front( i+1 );
-//    }
-//    std::cout << "Size = " << lar.size() << std::endl;
-//
-//    Lariat<float, 10> lar_copy( lar );
-//
-//    // check content of the copy
-//    for ( unsigned i = 0; i < 50; ++i ) {
-//        if ( i != lar_copy.find( static_cast<float>( i+1 ) ) ) {
-//            std::cout << "Find failed\n";
-//        }
-//    }
-//
-//    std::cout << "Before clear " << lar_copy << std::endl;
-//    lar_copy.clear();
-//    std::cout << "Size = " << lar_copy.size() << std::endl;
-//
-//    // check content of the original
-//    for ( unsigned i = 0; i < 50; ++i ) {
-//        if ( i != lar.find( i+1 ) ) {
-//            std::cout << "Find failed\n";
-//        }
-//    }
-//}
-//
+void test20() // assignment - basic tests
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    const int asize = 6;
+    Lariat<int, asize> lar, lar2;
+    for( int i = 50; i < 100; ++i ) {
+        lar.push_back( i+1 );
+        lar2.push_front( i+1 );
+    }
+    for( int i = 49; i >=0; --i ) {
+        lar.push_front( i+1 );
+        lar2.push_back( i+1 );
+        lar2.push_front( 2*i+1 );
+    }
+    std::cout << "Size1 = " << lar.size() << std::endl;
+    std::cout << "Size2 = " << lar2.size() << std::endl;
+
+    lar2 = lar;
+    std::cout << "Size2 = " << lar2.size() << std::endl;
+
+    // check content of lar2
+    for ( unsigned i = 0; i < 50; ++i ) {
+        if ( i != lar2.find( i+1 ) ) {
+            std::cout << "Find failed\n";
+        }
+    }
+
+    lar2.clear();
+    std::cout << "Size2 = " << lar2.size() << std::endl;
+
+    // check content of the original
+    for ( unsigned i = 0; i < 50; ++i ) {
+        if ( i != lar.find( i+1 ) ) {
+            std::cout << "Find failed\n";
+        }
+    }
+}
+
+void test21() // copy ctor - different instantiations
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    const int asize = 6;
+    Lariat<int, asize> lar;
+    for( int i = 50; i < 100; ++i ) {
+        lar.push_back( i+1 );
+    }
+    for( int i = 49; i >=0; --i ) {
+        lar.push_front( i+1 );
+    }
+    std::cout << "Size = " << lar.size() << std::endl;
+
+    Lariat<float, 10> lar_copy( lar );
+
+    // check content of the copy
+    for ( unsigned i = 0; i < 50; ++i ) {
+        if ( i != lar_copy.find( static_cast<float>( i+1 ) ) ) {
+            std::cout << "Find failed\n";
+        }
+    }
+
+    std::cout << "Before clear " << lar_copy << std::endl;
+    lar_copy.clear();
+    std::cout << "Size = " << lar_copy.size() << std::endl;
+
+    // check content of the original
+    for ( unsigned i = 0; i < 50; ++i ) {
+        if ( i != lar.find( i+1 ) ) {
+            std::cout << "Find failed\n";
+        }
+    }
+}
+
 //void test22() // assignment - different instantiations
 //{
 //    std::cout << "-------- " << __func__ << " --------\n";
@@ -1124,7 +1124,7 @@ int main(int argc, char *argv[] ) {
     //    }
     //}
 
-  test19();
+  test21();
 
     return 0;
 }
