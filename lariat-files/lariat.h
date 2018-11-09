@@ -159,35 +159,16 @@ Lariat<T, Size>::Lariat()
 template <typename T, int Size>
 Lariat<T, Size>::Lariat(Lariat const& rhs): head_(nullptr), tail_(nullptr)
 {
+  asize_ = rhs.asize_;
+
   auto* walker = rhs.head_;
-  LNode* prev = nullptr;
   while (walker)
   {
-    LNode* newNode = nullptr;
-    // Kick start the copy.
-    if (!head_ && !tail_)
+    for (auto i = 0; i < walker->count; i++)
     {
-      kick_start();
-      newNode = head_;
-      prev = head_;
+      push_back(walker->values[i]);
     }
-    else
-    {
-      newNode = allocate();
-      if (!prev)
-      {
-        prev = newNode;
-      }
-    }
-
-    copy_values(walker, newNode);
-    link(prev, newNode);
-    
     walker = walker->next;
-    if (prev && prev->next)
-    {
-      prev = prev->next;
-    }
   }
 }
 
@@ -197,6 +178,8 @@ template <typename U, int Size1>
 Lariat<T, Size>::Lariat(Lariat<U, Size1> const& rhs)
 : head_(nullptr), tail_(nullptr)
 {
+  asize_ = rhs.asize_;
+
   auto* walker = rhs.head_;
   while (walker)
   {
