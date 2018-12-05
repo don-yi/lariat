@@ -7,7 +7,7 @@
 #include <utility>    // error strings
 //#include <cstring>     // memcpy
 
-class LariatException : public std::exception {
+class LariatException : public std::exception {  // NOLINT(hicpp-special-member-functions, cppcoreguidelines-special-member-functions)
 private:
   int m_ErrCode;
   std::string m_Description;
@@ -21,6 +21,7 @@ public:
     return m_ErrCode;
   }
 
+  // ReSharper disable once CppOverridingFunctionWithoutOverrideSpecifier
   virtual const char* what() const noexcept
   {
     return m_Description.c_str();
@@ -39,7 +40,7 @@ template<typename T, int Size>
 std::ostream& operator<< (std::ostream& os, Lariat<T, Size> const& rhs);
 
 template <typename T, int Size>
-class Lariat
+class Lariat  // NOLINT(hicpp-special-member-functions)
 {
 public:
   Lariat();                  // default constructor                        
@@ -47,13 +48,13 @@ public:
   ~Lariat(); // destructor
 
   // todo:
-  template<typename U, int Size1>
-  Lariat(Lariat<U, Size1> const& rhs); // copy constructor
+  template<typename U, int Size2>
+  Lariat(Lariat<U, Size2> const& rhs); // copy constructor
 
   Lariat& operator=(Lariat const& rhs);
 
   // todo:
-  template <typename U, int Size1>
+  template <typename U, int Size2>
   friend class Lariat;
 
 // operator= (template)
@@ -92,7 +93,7 @@ public:
   void compact();             // push data in front reusing empty positions and delete remaining nodes
 
 private:
-  struct LNode
+  struct LNode  // NOLINT
   {
     LNode* next = nullptr;
     LNode* prev = nullptr;
@@ -101,8 +102,8 @@ private:
   };
   LNode* head_;           // points to the first node
   LNode* tail_;           // points to the last node
-  int size_;              // the number of items (not nodes) in the list
-  mutable int nodecount_; // the number of nodes in the list
+  int size_{};              // the number of items (not nodes) in the list
+  mutable int nodecount_{}; // the number of nodes in the list
   int asize_;             // the size of the array within the nodes
 
   LNode* allocate();
@@ -114,7 +115,7 @@ private:
   LNode* split(LNode* node, int ind, T const& val);
   void shift_up(LNode* node, int ind);
   void shift_down(LNode* node, int ind);
-  int find_element(int ind, LNode** localNode);
+  static int find_element(int ind, LNode** localNode);
   void link(LNode* prev, LNode* next);
   void copy_values(LNode* original, LNode* copy);
 };
@@ -147,7 +148,7 @@ std::ostream& operator<<(std::ostream &os, Lariat<T, Size> const & rhs)
 
 template <typename T, int Size>
 Lariat<T, Size>::Lariat()
-: head_(nullptr), tail_(nullptr), size_(0), nodecount_(0), asize_(Size)
+: head_(nullptr), tail_(nullptr), asize_(Size)
 {
 }
 
@@ -174,11 +175,11 @@ Lariat<T, Size>::Lariat(Lariat const& rhs): head_(nullptr), tail_(nullptr)
 
 // todo:
 template <typename T, int Size>
-template <typename U, int Size1>
-Lariat<T, Size>::Lariat(Lariat<U, Size1> const& rhs)
+template <typename U, int Size2>
+Lariat<T, Size>::Lariat(Lariat<U, Size2> const& rhs)
 : head_(nullptr), tail_(nullptr)
 {
-  asize_ = rhs.asize_;
+  asize_ = Size2;
 
   auto* walker = rhs.head_;
   while (walker)
@@ -378,7 +379,7 @@ void Lariat<T, Size>::pop_front()
 }
 
 template <typename T, int Size>
-T& Lariat<T, Size>::operator[](int index)
+T& Lariat<T, Size>::operator[](const int index)
 {
   auto* localNode = head_;
   const auto localInd = find_element(index, &localNode);
