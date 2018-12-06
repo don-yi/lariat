@@ -47,13 +47,11 @@ public:
   Lariat(Lariat const& rhs); // copy constructor
   ~Lariat(); // destructor
 
-  // todo:
   template<typename U, int Size2>
-  Lariat(Lariat<U, Size2> const& rhs); // copy constructor
+  explicit Lariat(Lariat<U, Size2> const& rhs); // copy constructor
 
   Lariat& operator=(Lariat const& rhs);
 
-  // todo:
   template <typename U, int Size2>
   friend class Lariat;
 
@@ -173,13 +171,12 @@ Lariat<T, Size>::Lariat(Lariat const& rhs): head_(nullptr), tail_(nullptr)
   }
 }
 
-// todo:
 template <typename T, int Size>
 template <typename U, int Size2>
 Lariat<T, Size>::Lariat(Lariat<U, Size2> const& rhs)
 : head_(nullptr), tail_(nullptr)
 {
-  asize_ = Size2;
+  asize_ = Size;
 
   auto* walker = rhs.head_;
   while (walker)
@@ -387,7 +384,7 @@ T& Lariat<T, Size>::operator[](const int index)
 }
 
 template <typename T, int Size>
-const T& Lariat<T, Size>::operator[](int index) const
+const T& Lariat<T, Size>::operator[](const int index) const
 {
   auto* localNode = head_;
   const auto localInd = find_element(index, &localNode);
