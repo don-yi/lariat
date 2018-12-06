@@ -286,7 +286,7 @@ void Lariat<T, Size>::insert(const int index, const T& value)
 template <typename T, int Size>
 void Lariat<T, Size>::push_back(const T& value)
 {
-  if (!head_ && !tail_)
+  if (!head_)
   {
     kick_start();
   }
@@ -305,7 +305,7 @@ template <typename T, int Size>
 void Lariat<T, Size>::push_front(const T& value)
 {
   // If the head node is empty, increment the node's count.
-  if (!head_ && !tail_)
+  if (!head_)
   {
     kick_start();
   }
@@ -484,6 +484,12 @@ void Lariat<T, Size>::clear()
 template <typename T, int Size>
 void Lariat<T, Size>::compact()
 {
+  // Handle empty lariat.
+  if (!head_)
+  {
+    return;
+  }
+
   // First, loop through the list with both feet until the left node is not
     // already full and the right foot hasn't walked off the list.
   auto* lft = head_;

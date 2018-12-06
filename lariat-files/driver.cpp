@@ -1025,86 +1025,86 @@ void run_scenario_cmp_to_vector_time // optimizations
     //sc.DrawStats( labels );
 }
 
-//void test23()
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    // this is a random scenario - no output provided
-//    // mostly for YOUR OWN debugging 
-//    run_scenario_with_alotof_output<6>( // node size
-//            40,     // num operations
-//            3, 1,   // insert, erase
-//            2, 2,   // pushfront, pushback
-//            1, 1,   // popfront, popback
-//            1,      // compact 
-//            1,      // index
-//            1       // find
-//            ); 
-//}
-//
-//void test24()
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    // this is random scenario
-//    // expected output - NONE
-//    // stress testing and correctness
-//    run_scenario_cmp_to_vector<100>( // node size
-//            2000,      // num operations
-//            4, 1,       // insert, erase
-//            4, 2,       // pushfront, pushback
-//            1, 1,       // popfront, popback
-//            1,          // compact 
-//            1,          // index
-//            1           // find
-//            ); 
-//}
-//
-//void test25()
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    // this is random scenario - no output provided
-//    // mostly for your own speed testing
-//    // expected output - time, not used in grading
-//    run_scenario_cmp_to_vector_time<5000>( // node size
-//            200000,     // num operations
-//            2, 1,       // insert, erase
-//            1, 1,       // pushfront, pushback
-//            1, 1,       // popfront, popback
-//            1,          // compact 
-//            1,          // index
-//            1           // find
-//            ); 
-//}
-//
-//// small test for valgrind
-//void test26()
-//{
-//    std::cout << "-------- " << __func__ << " --------\n";
-//    // this is random scenario
-//    // expected output - NONE
-//    // stress testing and correctness
-//    run_scenario_cmp_to_vector<10>( // node size
-//            200,      // num operations
-//            4, 1,       // insert, erase
-//            4, 2,       // pushfront, pushback
-//            1, 1,       // popfront, popback
-//            1,          // compact 
-//            1,          // index
-//            1           // find
-//            ); 
-//}
-//
-//
-//void (*pTests[])(void) = { 
-//	test0, test1, test2, test3, test4, test5, test6, 
-//	test7, test8, test9, test10, test11, test12, test13, 
-//	test14, test15, test16, test17, test18, test19, test20,
-//	test21, test22, test23, test24, test25, test26
-//};
-//
-//void test_all() {
-//	for (size_t i = 0; i<sizeof(pTests)/sizeof(pTests[0]); ++i)
-//		pTests[i]();
-//}
+void test23()
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    // this is a random scenario - no output provided
+    // mostly for YOUR OWN debugging 
+    run_scenario_with_alotof_output<6>( // node size
+            40,     // num operations
+            3, 1,   // insert, erase
+            2, 2,   // pushfront, pushback
+            1, 1,   // popfront, popback
+            1,      // compact 
+            1,      // index
+            1       // find
+            ); 
+}
+
+void test24()
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    // this is random scenario
+    // expected output - NONE
+    // stress testing and correctness
+    run_scenario_cmp_to_vector<100>( // node size
+            2000,      // num operations
+            4, 1,       // insert, erase
+            4, 2,       // pushfront, pushback
+            1, 1,       // popfront, popback
+            1,          // compact 
+            1,          // index
+            1           // find
+            ); 
+}
+
+void test25()
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    // this is random scenario - no output provided
+    // mostly for your own speed testing
+    // expected output - time, not used in grading
+    run_scenario_cmp_to_vector_time<5000>( // node size
+            200000,     // num operations
+            2, 1,       // insert, erase
+            1, 1,       // pushfront, pushback
+            1, 1,       // popfront, popback
+            1,          // compact 
+            1,          // index
+            1           // find
+            ); 
+}
+
+// small test for valgrind
+void test26()
+{
+    std::cout << "-------- " << __func__ << " --------\n";
+    // this is random scenario
+    // expected output - NONE
+    // stress testing and correctness
+    run_scenario_cmp_to_vector<10>( // node size
+            200,      // num operations
+            4, 1,       // insert, erase
+            4, 2,       // pushfront, pushback
+            1, 1,       // popfront, popback
+            1,          // compact 
+            1,          // index
+            1           // find
+            ); 
+}
+
+
+void (*pTests[])(void) = { 
+	test0, test1, test2, test3, test4, test5, test6, 
+	test7, test8, test9, test10, test11, test12, test13, 
+	test14, test15, test16, test17, test18, test19, test20,
+	test21, test22, test23, test24, test25, test26
+};
+
+void test_all() {
+	for (size_t i = 0; i<sizeof(pTests)/sizeof(pTests[0]); ++i)
+		pTests[i]();
+}
 
 #include <cstdio> /* sscanf */
 int main(int argc, char *argv[] ) {
@@ -1124,7 +1124,7 @@ int main(int argc, char *argv[] ) {
     //    }
     //}
 
-  test22();
+  test23();
 
   return 0;
 }
