@@ -52,12 +52,10 @@ public:
 
   Lariat& operator=(Lariat const& rhs);
 
-  template <typename U, int Size2>
-  friend class Lariat;
+  template<typename U, int Size2>
+  Lariat& operator=(Lariat<U, Size2> const& rhs);
 
-// operator= (template)
-  // This assignment operator follows the exact same algorithm as the own-type
-    // version, but is a nested template like I described above.
+  friend class Lariat;
 
   // inserts
   void insert(int index, T const& value);
@@ -202,6 +200,26 @@ Lariat<T, Size>& Lariat<T, Size>::operator=(Lariat const& rhs)
     // data, then walk through the right-hand argument's list adding each
     // element to this instance
   asize_ = rhs.asize_;
+  clear();
+
+  auto* walker = rhs.head_;
+  while (walker)
+  {
+    for (auto i = 0; i < walker->count; i++)
+    {
+      push_back(walker->values[i]);
+    }
+    walker = walker->next;
+  }
+
+  return *this;
+}
+
+template <typename T, int Size>
+template <typename U, int Size2>
+Lariat<T, Size>& Lariat<T, Size>::operator=(Lariat<U, Size2> const& rhs)
+{
+  asize_ = Size;
   clear();
 
   auto* walker = rhs.head_;
