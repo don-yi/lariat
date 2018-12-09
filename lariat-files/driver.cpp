@@ -1,3 +1,7 @@
+#define CRTDBG_MAP_ALLOC
+#include <cstdlib>
+#include <crtdbg.h>
+
 // TODO - check RouletteWheel - needs 9 positions
 // upper_bound or lower_bound
 // check find separately
@@ -1124,7 +1128,14 @@ int main(int argc, char *argv[] ) {
     //    }
     //}
 
-  test23();
+  test24();
+
+  _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+  _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
+  _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
+  _CrtSetBreakAlloc(-1);
+
+  std::getchar();
 
   return 0;
 }

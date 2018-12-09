@@ -298,7 +298,10 @@ void Lariat<T, Size>::push_back(const T& value)
     link(tail_, split(tail_, true));
   }
 
-  add_value(tail_, tail_->count, value);
+  if (tail_)
+  {
+    add_value(tail_, tail_->count, value);
+  }
 }
 
 template <typename T, int Size>
@@ -436,6 +439,11 @@ T const& Lariat<T, Size>::last() const
 template <typename T, int Size>
 unsigned Lariat<T, Size>::find(const T& value) const
 {
+  if (!head_)
+  {
+    return {};
+  }
+
   // Walk the list in a similar fashion to that detailed in the findElement
     // helper function, but check equivalence for each element in each node,
     // returning the index when the desired element is found.
@@ -496,8 +504,8 @@ void Lariat<T, Size>::compact()
   auto* rft = head_->next;
   while (lft->count == asize_ && rft)
   {
-    rft = rft->next;
     lft = lft->next;
+    rft = rft->next;
   }
 
   // Next, walk through the list while the right foot hasn't lost the list.
@@ -546,7 +554,7 @@ void Lariat<T, Size>::deallocate(LNode* deleteFrom)
   if (deleteFrom->prev)
   {
     tail_ = deleteFrom->prev;
-    deleteFrom->prev->next = nullptr;
+    tail_->next = nullptr;
   }
   // Handle the head pointer.
   else if (deleteFrom == head_)
@@ -568,9 +576,14 @@ void Lariat<T, Size>::deallocate(LNode* deleteFrom)
 template <typename T, int Size>
 void Lariat<T, Size>::add_value(LNode* node, int ind, T const& val)
 {
-    node->values[ind] = val;
-    ++node->count;
-    ++size_;
+  if (!node)
+  {
+    return;
+  }
+
+  node->values[ind] = val;
+  ++node->count;
+  ++size_;
 }
 
 template <typename T, int Size>
