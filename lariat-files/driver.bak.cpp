@@ -1,3 +1,7 @@
+#define CRTDBG_MAP_ALLOC
+#include <cstdlib>
+#include <crtdbg.h>
+
 // TODO - check RouletteWheel - needs 9 positions
 // upper_bound or lower_bound
 // check find separately
@@ -1108,22 +1112,30 @@ void test_all() {
 
 #include <cstdio> /* sscanf */
 int main(int argc, char *argv[] ) {
-    if (argc >1) {
-        int test = 0;
-        std::sscanf(argv[1],"%i",&test);
-        try {
-            pTests[test]();
-        } catch( const char* msg) {
-            std::cerr << msg << std::endl;
-        }
-    } else {
-        try {
-            test_all();
-        } catch( const char* msg) {
-            std::cerr << msg << std::endl;
-        }
-    }
+    //if (argc >1) {
+    //    int test = 0;
+    //    std::sscanf(argv[1],"%i",&test);
+    //    try {
+    //        pTests[test]();
+    //    } catch( const char* msg) {
+    //        std::cerr << msg << std::endl;
+    //    }
+    //} else {
+    //    try {
+    //        test_all();
+    //    } catch( const char* msg) {
+    //        std::cerr << msg << std::endl;
+    //    }
+    //}
 
+  test25();
 
-    return 0;
+  _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+  _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
+  _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
+  _CrtSetBreakAlloc(-1);
+
+  //std::getchar();
+
+  return 0;
 }

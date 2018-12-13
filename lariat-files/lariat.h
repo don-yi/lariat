@@ -57,6 +57,7 @@ public:
   template<typename U, int Size2>
   Lariat& operator=(Lariat<U, Size2> const& rhs);
 
+  template<typename U, int Size2>
   friend class Lariat;
 
   // inserts
@@ -183,7 +184,7 @@ Lariat<T, Size>::Lariat(Lariat<U, Size2> const& rhs)
   {
     for (auto i = 0; i < walker->count; i++)
     {
-      push_back(static_cast<U>(walker->values[i]));
+      push_back(static_cast<T>(walker->values[i]));
     }
     walker = walker->next;
   }
@@ -230,7 +231,7 @@ Lariat<T, Size>& Lariat<T, Size>::operator=(Lariat<U, Size2> const& rhs)
   {
     for (auto i = 0; i < walker->count; i++)
     {
-      push_back(walker->values[i]);
+      push_back(static_cast<T>(walker->values[i]));
     }
     walker = walker->next;
   }

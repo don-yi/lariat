@@ -12,10 +12,10 @@ DIFF_OPTIONS=-y # -W 210 --suppress-common-lines -a
 TESTS:=0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 24
 OTHERTESTS:=
 MEMTESTS:=$(addprefix mem,$(TESTS) 23 25 26)
-SUBMISSION:=cs280_assignment2_lariat_matt.haynie.zip
+SUBMISSION:=cs280_assignment2_lariat_dennis.l.zip
 SUBMISSION_FILES:=lariat.cpp lariat.h
 
-$(SUBMISSION) : $(TESTS) 24 $(MEMTESTS) mem23 mem24 mem25 mem26 doxysuccess
+$(SUBMISSION) : $(TESTS) 24 $(MEMTESTS) mem23 mem24 mem25 mem26
 	zip $(SUBMISSION) $(SUBMISSION_FILES)
 
 latex/Makefile doxysuccess : $(SUBMISSION_FILES) Doxyfile
