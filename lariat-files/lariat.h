@@ -5,6 +5,8 @@
 
 #include <string>     // error strings
 #include <utility>    // error strings
+#include <assert.h>
+
 //#include <cstring>     // memcpy
 
 class LariatException : public std::exception {  // NOLINT(hicpp-special-member-functions, cppcoreguidelines-special-member-functions)
@@ -190,7 +192,8 @@ Lariat<T, Size>::Lariat(Lariat<U, Size2> const& rhs)
 template <typename T, int Size>
 Lariat<T, Size>::~Lariat()
 {
-  deallocate(head_);
+  //deallocate(head_);
+  clear();
 }
 
 template <typename T, int Size>
@@ -298,10 +301,11 @@ void Lariat<T, Size>::push_back(const T& value)
     link(tail_, split(tail_, true));
   }
 
-  if (!tail_->prev)
-  {
-    return;
-  }
+  //if (!tail_->prev && head_ != tail_)
+  //{
+  //  assert(false);
+  //  return;
+  //}
   add_value(tail_, tail_->count, value);
 }
 
@@ -385,17 +389,35 @@ void Lariat<T, Size>::pop_back()
   // safety check
   if (!nodecount_)
   {
+    assert(false);
     return;
   }
 
   // Decrement the count of the tail node.
   --tail_->count;
   --size_;
+  assert(size_ >= 0);
 
   // Handle tail pointer.
-  if (tail_->count == 0 && head_ != tail_)
+  if (tail_->count == 0)
   {
-    deallocate(tail_);
+    //deallocate(tail_);
+
+    auto* emptyTail = tail_;
+
+    if (tail_ == head_)
+    {
+      head_ = nullptr;
+    }
+
+    tail_ = tail_->prev;
+    if (tail_)
+    {
+      tail_->next = nullptr;
+    }
+
+    delete emptyTail;
+    --nodecount_;
   }
 }
 
@@ -426,6 +448,7 @@ void Lariat<T, Size>::pop_front()
       tail_ = head_;
     }
     delete emptyHead;
+    head_ = nullptr;
   }
 }
 
@@ -521,6 +544,7 @@ void Lariat<T, Size>::clear()
   // Once the list is empty, update the necessary member variables.
   size_ = 0;
   nodecount_ = 0;
+  head_ = tail_ = nullptr;
 }
 
 // Compact takes all the data stored in the linked list and moves it into the
@@ -591,7 +615,7 @@ typename Lariat<T, Size>::LNode* Lariat<T, Size>::allocate()
 template <typename T, int Size>
 void Lariat<T, Size>::deallocate(LNode* deleteFrom)
 {
-  if (!deleteFrom || !head_ || !tail_->prev)
+  if (!deleteFrom || !head_)
   {
     return;
   }
@@ -628,12 +652,14 @@ void Lariat<T, Size>::add_value(LNode* node, int ind, T const& val)
 {
   if (!node)
   {
+    assert(false);
     return;
   }
 
   node->values[ind] = val;
   ++node->count;
   ++size_;
+  assert(size_ >= 0);
 }
 
 template <typename T, int Size>
@@ -641,6 +667,7 @@ void Lariat<T, Size>::remove_value(LNode* node)
 {
   --node->count;
   --size_;
+  assert(size_ >= 0);
 }
 
 template <typename T, int Size>
@@ -748,6 +775,7 @@ void Lariat<T, Size>::shift_down(LNode* node, const int ind)
   }
   --node->count;
   --size_;
+  assert(size_ >= 0);
 }
 
 template <typename T, int Size>
